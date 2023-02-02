@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using outdesk.codingtest.api.Requests;
 using outdesk.codingtest.Infrastructure.Services.Interfaces;
-using System.Runtime.CompilerServices;
 
 namespace outdesk.codingtest.api.Application.Commands
 {
@@ -16,7 +15,7 @@ namespace outdesk.codingtest.api.Application.Commands
 
         public async Task<Unit> Handle(GetBookRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Unit.Value;
         }
     }
 }

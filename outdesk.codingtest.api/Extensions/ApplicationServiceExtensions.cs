@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using outdesk.codingtest.api.Errors;
+using outdesk.codingtest.api.Helpers;
 using outdesk.codingtest.Infrastructure.Data;
 using outdesk.codingtest.Infrastructure.Data.Repositories;
 using outdesk.codingtest.Infrastructure.Data.Repositories.Interfaces;
 using outdesk.codingtest.Infrastructure.Services;
 using outdesk.codingtest.Infrastructure.Services.Interfaces;
+using System.ComponentModel;
 
 namespace outdesk.codingtest.api.Extensions
 {
@@ -16,14 +19,12 @@ namespace outdesk.codingtest.api.Extensions
             services.AddScoped<IBookService, BookService>();
 
             //Repositories
-            //services.AddScoped<IJobRepository, JobRepository>();
-            //services.AddScoped<IEmployerRepository, EmployerRepository>();
-            //services.AddScoped<IDriverRouteRepository, DriverRouteRepository>();
-            //services.AddScoped<ITransportationRepository, TransportationRepository>();
-            //services.AddScoped<IDriverRepository, DriverRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IReservedBookRepository, ReservedBookRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+            services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = actionContext =>
