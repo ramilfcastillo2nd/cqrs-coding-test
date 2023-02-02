@@ -1,4 +1,4 @@
-﻿namespace outdesk.codingtest.Infrastructure.Data.Entities
+﻿namespace outdesk.codingtest.Core.Entities
 {
     public class Book: BaseEntity
     {

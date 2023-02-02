@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using outdesk.codingtest.Core.DTO;
-using outdesk.codingtest.Infrastructure.Data.Entities;
+using outdesk.codingtest.Core.Entities;
+using outdesk.codingtest.Core.Specifications;
 using outdesk.codingtest.Infrastructure.Data.Repositories.Interfaces;
 using outdesk.codingtest.Infrastructure.Services.Interfaces;
 
@@ -36,10 +37,11 @@ namespace outdesk.codingtest.Infrastructure.Services
             await _unitOfWork.Complete();
         }
 
-        public async Task<List<BookDto>> GetBooks()
+        public async Task<IReadOnlyList<BookDto>> GetBooks(BookSpecParams specParams)
         {
-            var books = await _repository.Books().AsNoTracking().ToListAsync();
-            var booksMapped  = _mapper.Map<List<BookDto>>(books);
+            var specs = new GetBooksSpecification(specParams);
+            var books = await _unitOfWork.Repository<Book>().ListAsync(specs);
+            var booksMapped  = _mapper.Map<IReadOnlyList<BookDto>>(books);
             return booksMapped;
         }
     }

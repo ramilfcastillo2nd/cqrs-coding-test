@@ -1,4 +1,4 @@
-﻿using outdesk.codingtest.Infrastructure.Data.Entities;
+﻿using outdesk.codingtest.Core.Entities;
 using outdesk.codingtest.Infrastructure.Data.Repositories.Interfaces;
 
 namespace outdesk.codingtest.Infrastructure.Data.Repositories

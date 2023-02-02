@@ -18,6 +18,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddMediatR(typeof(Program).GetTypeInfo().Assembly);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddDbContext<OutDeskContext>(options =>
 {
     options.UseSqlServer(config.GetSection("ConnectionStrings:DefaultConnection").Value, b => b.MigrationsAssembly("outdesk.codingtest.Infrastructure"));

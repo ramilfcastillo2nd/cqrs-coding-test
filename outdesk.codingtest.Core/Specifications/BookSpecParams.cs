@@ -17,7 +17,7 @@
         public string Search
         {
             get => _search;
-            set => _search = value.ToLower();
+            set => _search = value == null? string.Empty: value.ToLower();
         }
     }
 }

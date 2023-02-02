@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using outdesk.codingtest.Core.Entities;
 using outdesk.codingtest.Core.Specifications;
-using outdesk.codingtest.Infrastructure.Data.Entities;
 
 namespace outdesk.codingtest.Infrastructure.Data
 {

@@ -28,7 +28,7 @@ namespace outdesk.codingtest.api.Controllers
             //};
 
             //var results = await _mediator.Send(req);
-            var results = await _bookService.GetBooks();
+            var results = await _bookService.GetBooks(request);
 
             return Ok(results);
         }

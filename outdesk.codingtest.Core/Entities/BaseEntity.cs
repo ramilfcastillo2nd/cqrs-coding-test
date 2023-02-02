@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace outdesk.codingtest.Infrastructure.Data.Entities
+namespace outdesk.codingtest.Core.Entities
 {
     public class BaseEntity
     {

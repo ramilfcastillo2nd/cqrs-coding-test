@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using outdesk.codingtest.Core.DTO;
-using outdesk.codingtest.Infrastructure.Data.Entities;
+using outdesk.codingtest.Core.Entities;
 
 namespace outdesk.codingtest.api.Helpers
 {

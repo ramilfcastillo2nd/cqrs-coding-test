@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using outdesk.codingtest.Infrastructure.Data.Entities;
+using outdesk.codingtest.Core.Entities;
 
 namespace outdesk.codingtest.Infrastructure.Data
 {
