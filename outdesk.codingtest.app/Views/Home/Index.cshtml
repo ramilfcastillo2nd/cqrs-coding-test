@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <div>
-                <label>Search:</label>
-                <input type="text" class="form-control" />
+            <div class="input-group">
+                <input type="text" class="form-control" id="txtSearch" placeholder="Book Name"/>
+                <button class="btn btn-primary" onclick="search()">Search</button>
             </div>
         </div>
     </div>
@@ -28,6 +28,7 @@
 <script type="text/javascript">
     initialize();
     function initialize() {
+        $("#tblBooks tbody tr").remove();
         $.ajax({
             url: 'https://localhost:7002/api/bookstore/books?pageindex=1&pagesize=10&sort=nameasc&search=',
             type: 'GET',
@@ -35,15 +36,33 @@
             success: function (response) {
                 console.log(response);
 
-                //Try to get tbody first with jquery children. works faster!
                 var tbody = $('#tblBooks').children('tbody');
-
-                //Then if no tbody just select your table
                 var table = tbody.length ? tbody : $('#tblBooks');
                 response.forEach(function (item) {
+                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-secondary">Reserve</button></td></tr>`);
+                });
 
-                    //Add row
-                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-primary">Reserve</button></td></tr>`);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function search(){
+        $("#tblBooks tbody tr").remove();
+        var searchVal = $("#txtSearch").val();
+        $.ajax({
+            url: `https://localhost:7002/api/bookstore/books?pageindex=1&pagesize=10&sort=nameasc&search=${searchVal}`,
+            type: 'GET',
+            contentType: 'application/json; charset=UTF-8',
+            success: function (response) {
+                console.log(response);
+
+                var tbody = $('#tblBooks').children('tbody');
+                var table = tbody.length ? tbody : $('#tblBooks');
+                response.forEach(function (item) {
+                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-secondary">Reserve</button></td></tr>`);
                 });
 
             },
