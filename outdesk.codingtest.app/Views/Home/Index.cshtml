@@ -39,7 +39,7 @@
                 var tbody = $('#tblBooks').children('tbody');
                 var table = tbody.length ? tbody : $('#tblBooks');
                 response.forEach(function (item) {
-                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-success" onclick="reserve(${item.id})">Reserve</button></td></tr>`);
+                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-success" id="btnReserve" value="${item.id}">Reserve</button></td></tr>`);
                 });
 
             },
@@ -49,7 +49,7 @@
         });
     }
 
-    function search(){
+    function search() {
         $("#tblBooks tbody tr").remove();
         var searchVal = $("#txtSearch").val();
         $.ajax({
@@ -57,12 +57,11 @@
             type: 'GET',
             contentType: 'application/json; charset=UTF-8',
             success: function (response) {
-                console.log(response);
 
                 var tbody = $('#tblBooks').children('tbody');
                 var table = tbody.length ? tbody : $('#tblBooks');
                 response.forEach(function (item) {
-                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-success" onclick="reserve(${item.id})">Reserve</button></td></tr>`);
+                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-success" id="btnReserve" value="${item.id}">Reserve</button></td></tr>`);
                 });
 
             },
@@ -72,7 +71,28 @@
         });
     }
 
-    function reserve(bookId) {
-        console.log(bookId);
-    }
+    $(function () {
+        $(document).on("click", '#btnReserve', function () {
+            var bookId = $(this).attr('value');
+
+            var reserveData = {
+                bookId: bookId
+            };
+
+            $.ajax({
+                url: `https://localhost:7002/api/bookstore/reserve`,
+                type: 'POST',
+                    data: JSON.stringify(reserveData),
+                dataType: "json",
+                contentType: 'application/json; charset=UTF-8',
+                success: function (response) {
+                    alert("Success!");
+                },
+                error: function (err) {
+                    console.log(err);
+                    alert(err.responseJSON.message);
+                }
+            });
+        });
+    });
 </script>

@@ -6,14 +6,15 @@ namespace outdesk.codingtest.api.Application.Commands
 {
     public class ReserveBookCommandHandler : IRequestHandler<ReserveBookRequest>
     {
-        private readonly IBookService _bookService;
-        public ReserveBookCommandHandler(IBookService bookService)
+        private readonly IReservedBookService _reservedBookService;
+        public ReserveBookCommandHandler(IReservedBookService reservedBookService)
         {
-            _bookService = bookService;
+            _reservedBookService = reservedBookService;
         }
-        public Task<Unit> Handle(ReserveBookRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ReserveBookRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _reservedBookService.ReserveBook(request.BookId);
+            return Unit.Value;
         }
     }
 }

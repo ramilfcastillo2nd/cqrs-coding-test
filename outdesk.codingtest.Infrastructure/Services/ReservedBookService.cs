@@ -30,6 +30,7 @@ namespace outdesk.codingtest.Infrastructure.Services
                 BookId = bookId,
                 BookingNumber = bookingNumber
             });
+            await _unitOfWork.Complete();
         }
     }
 }
