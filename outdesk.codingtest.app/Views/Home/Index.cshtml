@@ -39,7 +39,7 @@
                 var tbody = $('#tblBooks').children('tbody');
                 var table = tbody.length ? tbody : $('#tblBooks');
                 response.forEach(function (item) {
-                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-secondary">Reserve</button></td></tr>`);
+                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-success" onclick="reserve(${item.id})">Reserve</button></td></tr>`);
                 });
 
             },
@@ -62,7 +62,7 @@
                 var tbody = $('#tblBooks').children('tbody');
                 var table = tbody.length ? tbody : $('#tblBooks');
                 response.forEach(function (item) {
-                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-secondary">Reserve</button></td></tr>`);
+                    table.append(`<tr><td>${item.name}</td><td><button class="btn btn-success" onclick="reserve(${item.id})">Reserve</button></td></tr>`);
                 });
 
             },
@@ -70,5 +70,9 @@
                 console.log(err);
             }
         });
+    }
+
+    function reserve(bookId) {
+        console.log(bookId);
     }
 </script>

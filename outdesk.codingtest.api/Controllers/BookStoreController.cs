@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using outdesk.codingtest.api.Errors;
 using outdesk.codingtest.api.Requests;
+using outdesk.codingtest.Core.DTO;
 using outdesk.codingtest.Core.Specifications;
 using outdesk.codingtest.Infrastructure.Services.Interfaces;
 
@@ -31,6 +33,26 @@ namespace outdesk.codingtest.api.Controllers
             var results = await _bookService.GetBooks(request);
 
             return Ok(results);
+        }
+
+        [HttpPost("reserve")]
+        public async Task<IActionResult> ReserveBook([FromBody] ReserveBookRequestDto request)
+        {
+            try
+            {
+                var req = new ReserveBookRequest
+                {
+                    BookId = request.BookId
+                };
+
+                var results = await _mediator.Send(req);
+
+                return Ok();
+            }
+            catch (Exception x)
+            {
+                return BadRequest(new ApiResponse(400, x.Message));
+            }
         }
     }
 }

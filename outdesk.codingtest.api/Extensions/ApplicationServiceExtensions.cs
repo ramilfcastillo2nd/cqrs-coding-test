@@ -17,6 +17,7 @@ namespace outdesk.codingtest.api.Extensions
         {
             //Services
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IReservedBookService, ReservedBookService>();
 
             //Repositories
             services.AddScoped<IBookRepository, BookRepository>();
