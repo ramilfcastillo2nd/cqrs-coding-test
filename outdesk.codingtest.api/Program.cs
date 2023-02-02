@@ -23,6 +23,28 @@ builder.Services.AddDbContext<OutDeskContext>(options =>
 {
     options.UseSqlServer(config.GetSection("ConnectionStrings:DefaultConnection").Value, b => b.MigrationsAssembly("outdesk.codingtest.Infrastructure"));
 }, ServiceLifetime.Scoped);
+
+var corsName = "corslist";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsName, builder =>
+    {
+        //App:CorsOrigins in appsettings.json can contain more than one address with splitted by comma.
+        builder
+            .WithOrigins(
+               // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
+               config.GetSection("App:CorsOrigins").Value
+                    .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .ToArray()
+            )
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
+            .SetIsOriginAllowed(origin => true)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -38,6 +60,7 @@ if (app.Environment.IsDevelopment())
 
 SeedDatabase();
 app.UseHttpsRedirection();
+app.UseCors(corsName); //Enable CORS!
 
 app.UseAuthorization();
 
